@@ -18,6 +18,12 @@ if [ ! -f /etc/nginx/ssl/gregory.bot.crt ]; then
     openssl x509 -req -days 365 -in "/etc/nginx/ssl/gregory.bot.csr" -signkey "/etc/nginx/ssl/gregory.bot.key" -out "/etc/nginx/ssl/gregory.bot.crt"
 fi
 
+if [ ! -f /etc/nginx/ssl/telegram.channel.crt ]; then
+    openssl genrsa -out "/etc/nginx/ssl/telegram.channel.key" 2048
+    openssl req -new -key "/etc/nginx/ssl/telegram.channel.key" -out "/etc/nginx/ssl/telegram.channel.csr" -subj "/CN=telegram.channel/O=TelegramChannel/C=UK"
+    openssl x509 -req -days 365 -in "/etc/nginx/ssl/telegram.channel.csr" -signkey "/etc/nginx/ssl/telegram.channel.key" -out "/etc/nginx/ssl/telegram.channel.crt"
+fi
+
 # Start crond in background
 crond -l 2 -b
 
