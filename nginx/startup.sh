@@ -24,6 +24,18 @@ if [ ! -f /etc/nginx/ssl/telegram.channel.crt ]; then
     openssl x509 -req -days 365 -in "/etc/nginx/ssl/telegram.channel.csr" -signkey "/etc/nginx/ssl/telegram.channel.key" -out "/etc/nginx/ssl/telegram.channel.crt"
 fi
 
+if [ ! -f /etc/nginx/ssl/telegraminfo.bot.crt ]; then
+    openssl genrsa -out "/etc/nginx/ssl/telegraminfo.bot.key" 2048
+    openssl req -new -key "/etc/nginx/ssl/telegraminfo.bot.key" -out "/etc/nginx/ssl/telegraminfo.bot.csr" -subj "/CN=telegraminfo.bot/O=TelegramInfoBot/C=UK"
+    openssl x509 -req -days 365 -in "/etc/nginx/ssl/telegraminfo.bot.csr" -signkey "/etc/nginx/ssl/telegraminfo.bot.key" -out "/etc/nginx/ssl/telegraminfo.bot.crt"
+fi
+
+if [ ! -f /etc/nginx/ssl/tilda.local.crt ]; then
+    openssl genrsa -out "/etc/nginx/ssl/tilda.local.key" 2048
+    openssl req -new -key "/etc/nginx/ssl/tilda.local.key" -out "/etc/nginx/ssl/tilda.local.csr" -subj "/CN=tilda.local/O=TildaExport/C=UK"
+    openssl x509 -req -days 365 -in "/etc/nginx/ssl/tilda.local.csr" -signkey "/etc/nginx/ssl/tilda.local.key" -out "/etc/nginx/ssl/tilda.local.crt"
+fi
+
 # Start crond in background
 crond -l 2 -b
 

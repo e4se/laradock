@@ -1033,7 +1033,7 @@ RUN if [ ${INSTALL_SYMFONY} = true ]; then \
 # PYTHON:
 ###########################################################################
 
-ARG INSTALL_PYTHON=false
+ARG INSTALL_PYTHON=true
 
 RUN if [ ${INSTALL_PYTHON} = true ]; then \
   apt-get -y install python python-pip python-dev build-essential  \
